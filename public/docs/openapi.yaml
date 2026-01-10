@@ -1,0 +1,508 @@
+openapi: 3.0.3
+info:
+  title: 'UwowBackend API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Endpoints
+    description: ''
+paths:
+  /api/posts:
+    get:
+      summary: 呈現所有文章
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{"status": "success", "message": "Posts retrieved successfully", "data": {...}}'
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 新增一筆文章資料
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Post created successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Post created successfully'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 標題
+                  example: 範例文章標題
+                img_file:
+                  type: string
+                  format: binary
+                  description: 上傳圖片
+                  nullable: true
+                content:
+                  type: string
+                  description: 文章內容
+                  example: 這是一篇範例文章的內容。
+                status:
+                  type: integer
+                  description: '文章狀態(0:未發布,1:發佈,2:排程用)'
+                  example: 1
+                published_at:
+                  type: string
+                  description: 發佈時間
+                  example: '2024-12-31 10:00:00'
+                  nullable: true
+                finished_at:
+                  type: string
+                  description: 結束時間
+                  example: '2025-01-31 23:59:59'
+                  nullable: true
+                slug:
+                  type: string
+                  description: 文章網址識別碼
+                  example: example-post-title
+                is_pinned:
+                  type: integer
+                  description: '文章是否置頂(0:否,1:是)'
+                  example: 0
+              required:
+                - title
+                - content
+                - status
+      security: []
+  '/api/posts/{id}':
+    get:
+      summary: 取得後台單筆文章資料
+      operationId: ''
+      description: '這邊我都是先假定是後台操作，前台 api 才使用 slug'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{"status": "success", "message": "Post found", "data": {...}}'
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 更新指定文章資料
+      operationId: ''
+      description: '圖片我選 file 型態上傳，因為 base64 會增加資料量'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{"status": "success", "message": "Post updated successfully", "data": {...}}'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 標題
+                  example: 範例文章標題
+                slug:
+                  type: string
+                  description: 文章網址識別碼
+                  example: example-post-title
+                img_file:
+                  type: string
+                  format: binary
+                  description: 上傳圖片
+                content:
+                  type: string
+                  description: 文章內容
+                  example: 這是一篇範例文章的內容。
+                sort_order:
+                  type: number
+                  description: 中值排序數值
+                  example: 150000.0
+                status:
+                  type: integer
+                  description: '文章狀態(0:未發布,1:發佈,2:排程用)'
+                  example: 1
+                is_pinned:
+                  type: integer
+                  description: '文章是否置頂(0:否,1:是)'
+                  example: 0
+                published_at:
+                  type: string
+                  description: 發佈時間
+                  example: '2024-12-31 10:00:00'
+                finished_at:
+                  type: string
+                  description: 結束時間
+                  example: '2025-01-31 23:59:59'
+              required:
+                - title
+                - content
+                - status
+      security: []
+    delete:
+      summary: 刪除指定文章資料（軟刪除）
+      operationId: ''
+      description: 因為沒做權限設計，所以先暫時忽略
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 文章已移至回收桶
+                properties:
+                  message:
+                    type: string
+                    example: 文章已移至回收桶
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the post.'
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/posts/search:
+    get:
+      summary: "搜尋文章\n資料量大時，可以改用全文索引解決方案，如 Elasticsearch 或 MySQL 的全文索引功能"
+      operationId: ElasticsearchMySQL
+      description: ''
+      parameters:
+        -
+          in: query
+          name: query
+          description: 搜尋關鍵字
+          example: 範例
+          required: true
+          schema:
+            type: string
+            description: 搜尋關鍵字
+            example: 範例
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{"status": "success", "message": "Search results retrieved successfully", "data": {...}}'
+      tags:
+        - Endpoints
+      security: []
+  /api/active-posts:
+    get:
+      summary: 顯示所有啟用中的文章
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Posts retrieved successfully'
+                  data:
+                    current_page: 1
+                    data:
+                      -
+                        id: 3
+                        title: 範例文章標題
+                        img_path: posts/XKljpWmkHa1JROpr71YK9FE7cpdxp73dvOJ1n1fw.jpg
+                        content: '<p>這是一篇範例文章的內容。</p>'
+                        sort_order: 300000
+                        status: 1
+                        is_pinned: 0
+                        slug: null
+                        published_at: '2024-12-31 10:00:00'
+                        finished_at: '2025-01-31 23:59:59'
+                        created_at: '2026-01-09T23:55:22.000000Z'
+                        updated_at: '2026-01-09T23:55:22.000000Z'
+                        deleted_at: null
+                      -
+                        id: 2
+                        title: 範例文章標題
+                        img_path: null
+                        content: '<p>這是一篇範例文章的內容。</p>'
+                        sort_order: 200000
+                        status: 1
+                        is_pinned: 0
+                        slug: null
+                        published_at: '2024-12-31 10:00:00'
+                        finished_at: '2025-01-31 23:59:59'
+                        created_at: '2026-01-09T23:55:14.000000Z'
+                        updated_at: '2026-01-09T23:55:14.000000Z'
+                        deleted_at: null
+                      -
+                        id: 1
+                        title: 範例文章標題
+                        img_path: posts/4NFGSEcTSiQ6iUMuZ8RoyvEvR6PdqYsEOq7rzvBF.jpg
+                        content: '<p>這是一篇範例文章的內容。</p>'
+                        sort_order: 100000
+                        status: 1
+                        is_pinned: 0
+                        slug: null
+                        published_at: '2024-12-31 10:00:00'
+                        finished_at: '2025-01-31 23:59:59'
+                        created_at: '2026-01-09T23:49:41.000000Z'
+                        updated_at: '2026-01-09T23:49:41.000000Z'
+                        deleted_at: null
+                    first_page_url: 'http://localhost:8000/api/active-posts?page=1'
+                    from: 1
+                    last_page: 1
+                    last_page_url: 'http://localhost:8000/api/active-posts?page=1'
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        page: null
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/active-posts?page=1'
+                        label: '1'
+                        page: 1
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        page: null
+                        active: false
+                    next_page_url: null
+                    path: 'http://localhost:8000/api/active-posts'
+                    per_page: 10
+                    prev_page_url: null
+                    to: 3
+                    total: 3
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Posts retrieved successfully'
+                  data:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      data:
+                        type: array
+                        example:
+                          -
+                            id: 3
+                            title: 範例文章標題
+                            img_path: posts/XKljpWmkHa1JROpr71YK9FE7cpdxp73dvOJ1n1fw.jpg
+                            content: '<p>這是一篇範例文章的內容。</p>'
+                            sort_order: 300000
+                            status: 1
+                            is_pinned: 0
+                            slug: null
+                            published_at: '2024-12-31 10:00:00'
+                            finished_at: '2025-01-31 23:59:59'
+                            created_at: '2026-01-09T23:55:22.000000Z'
+                            updated_at: '2026-01-09T23:55:22.000000Z'
+                            deleted_at: null
+                          -
+                            id: 2
+                            title: 範例文章標題
+                            img_path: null
+                            content: '<p>這是一篇範例文章的內容。</p>'
+                            sort_order: 200000
+                            status: 1
+                            is_pinned: 0
+                            slug: null
+                            published_at: '2024-12-31 10:00:00'
+                            finished_at: '2025-01-31 23:59:59'
+                            created_at: '2026-01-09T23:55:14.000000Z'
+                            updated_at: '2026-01-09T23:55:14.000000Z'
+                            deleted_at: null
+                          -
+                            id: 1
+                            title: 範例文章標題
+                            img_path: posts/4NFGSEcTSiQ6iUMuZ8RoyvEvR6PdqYsEOq7rzvBF.jpg
+                            content: '<p>這是一篇範例文章的內容。</p>'
+                            sort_order: 100000
+                            status: 1
+                            is_pinned: 0
+                            slug: null
+                            published_at: '2024-12-31 10:00:00'
+                            finished_at: '2025-01-31 23:59:59'
+                            created_at: '2026-01-09T23:49:41.000000Z'
+                            updated_at: '2026-01-09T23:49:41.000000Z'
+                            deleted_at: null
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 3
+                            title:
+                              type: string
+                              example: 範例文章標題
+                            img_path:
+                              type: string
+                              example: posts/XKljpWmkHa1JROpr71YK9FE7cpdxp73dvOJ1n1fw.jpg
+                            content:
+                              type: string
+                              example: '<p>這是一篇範例文章的內容。</p>'
+                            sort_order:
+                              type: integer
+                              example: 300000
+                            status:
+                              type: integer
+                              example: 1
+                            is_pinned:
+                              type: integer
+                              example: 0
+                            slug:
+                              type: string
+                              example: null
+                            published_at:
+                              type: string
+                              example: '2024-12-31 10:00:00'
+                            finished_at:
+                              type: string
+                              example: '2025-01-31 23:59:59'
+                            created_at:
+                              type: string
+                              example: '2026-01-09T23:55:22.000000Z'
+                            updated_at:
+                              type: string
+                              example: '2026-01-09T23:55:22.000000Z'
+                            deleted_at:
+                              type: string
+                              example: null
+                      first_page_url:
+                        type: string
+                        example: 'http://localhost:8000/api/active-posts?page=1'
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      last_page_url:
+                        type: string
+                        example: 'http://localhost:8000/api/active-posts?page=1'
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            page: null
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/active-posts?page=1'
+                            label: '1'
+                            page: 1
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            page: null
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            page:
+                              type: string
+                              example: null
+                            active:
+                              type: boolean
+                              example: false
+                      next_page_url:
+                        type: string
+                        example: null
+                      path:
+                        type: string
+                        example: 'http://localhost:8000/api/active-posts'
+                      per_page:
+                        type: integer
+                        example: 10
+                      prev_page_url:
+                        type: string
+                        example: null
+                      to:
+                        type: integer
+                        example: 3
+                      total:
+                        type: integer
+                        example: 3
+      tags:
+        - Endpoints
+      security: []
+  /api/trashed-posts:
+    get:
+      summary: 呈現資源回收桶的文章.
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{"status": "success", "message": "Posts retrieved successfully", "data": {...}}'
+      tags:
+        - Endpoints
+      security: []

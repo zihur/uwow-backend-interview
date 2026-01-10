@@ -1,0 +1,32 @@
+# --- Git & 說明文件 ---
+.git
+.gitignore
+README.md
+.github/
+.vscode/
+
+# --- 敏感資訊 (絕對不能進 Image) ---
+.env
+.env.backup
+auth.json
+
+# --- 開發依賴 (由 Docker 內部重新安裝) ---
+vendor/
+node_modules/
+npm-debug.log
+
+# --- Laravel 動態資料 (排除所有開發時產生的髒資料) ---
+storage/app/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*.php
+storage/logs/*.log
+
+# --- 排除 Docker 自身設定 ---
+Dockerfile
+docker-compose.yml
+docker/
+
+# --- 測試與日誌 ---
+tests/
+.phpunit.result.cache

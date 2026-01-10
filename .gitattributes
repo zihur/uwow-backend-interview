@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+# 強制 Windows 批次檔使用 CRLF (Windows 換行)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore

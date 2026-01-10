@@ -1,0 +1,465 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "UwowBackend API Documentation",
+        "_postman_id": "5b232dd3-6de3-4a10-984b-d284bc1b5482",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "\u5448\u73fe\u6240\u6709\u6587\u7ae0",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"success\", \"message\": \"Posts retrieved successfully\", \"data\": {...}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u53d6\u5f97\u5f8c\u53f0\u55ae\u7b46\u6587\u7ae0\u8cc7\u6599",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "architecto",
+                                    "description": "The ID of the post."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "\u9019\u908a\u6211\u90fd\u662f\u5148\u5047\u5b9a\u662f\u5f8c\u53f0\u64cd\u4f5c\uff0c\u524d\u53f0 api \u624d\u4f7f\u7528 slug",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"success\", \"message\": \"Post found\", \"data\": {...}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u65b0\u589e\u4e00\u7b46\u6587\u7ae0\u8cc7\u6599",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "title",
+                                    "value": "\u7bc4\u4f8b\u6587\u7ae0\u6a19\u984c",
+                                    "type": "text",
+                                    "description": "\u6a19\u984c"
+                                },
+                                {
+                                    "key": "content",
+                                    "value": "\u9019\u662f\u4e00\u7bc7\u7bc4\u4f8b\u6587\u7ae0\u7684\u5167\u5bb9\u3002",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u5167\u5bb9"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "1",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u72c0\u614b(0:\u672a\u767c\u5e03,1:\u767c\u4f48,2:\u6392\u7a0b\u7528)"
+                                },
+                                {
+                                    "key": "published_at",
+                                    "value": "2024-12-31 10:00:00",
+                                    "type": "text",
+                                    "description": "\u767c\u4f48\u6642\u9593"
+                                },
+                                {
+                                    "key": "finished_at",
+                                    "value": "2025-01-31 23:59:59",
+                                    "type": "text",
+                                    "description": "\u7d50\u675f\u6642\u9593"
+                                },
+                                {
+                                    "key": "slug",
+                                    "value": "example-post-title",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u7db2\u5740\u8b58\u5225\u78bc"
+                                },
+                                {
+                                    "key": "is_pinned",
+                                    "value": "0",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u662f\u5426\u7f6e\u9802(0:\u5426,1:\u662f)"
+                                },
+                                {
+                                    "key": "img_file",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"status\": \"success\", \"message\": \"Post created successfully\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u66f4\u65b0\u6307\u5b9a\u6587\u7ae0\u8cc7\u6599",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "architecto",
+                                    "description": "The ID of the post."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "title",
+                                    "value": "\u7bc4\u4f8b\u6587\u7ae0\u6a19\u984c",
+                                    "type": "text",
+                                    "description": "\u6a19\u984c"
+                                },
+                                {
+                                    "key": "slug",
+                                    "value": "example-post-title",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u7db2\u5740\u8b58\u5225\u78bc"
+                                },
+                                {
+                                    "key": "content",
+                                    "value": "\u9019\u662f\u4e00\u7bc7\u7bc4\u4f8b\u6587\u7ae0\u7684\u5167\u5bb9\u3002",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u5167\u5bb9"
+                                },
+                                {
+                                    "key": "sort_order",
+                                    "value": "150000",
+                                    "type": "text",
+                                    "description": "\u4e2d\u503c\u6392\u5e8f\u6578\u503c"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "1",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u72c0\u614b(0:\u672a\u767c\u5e03,1:\u767c\u4f48,2:\u6392\u7a0b\u7528)"
+                                },
+                                {
+                                    "key": "is_pinned",
+                                    "value": "0",
+                                    "type": "text",
+                                    "description": "\u6587\u7ae0\u662f\u5426\u7f6e\u9802(0:\u5426,1:\u662f)"
+                                },
+                                {
+                                    "key": "published_at",
+                                    "value": "2024-12-31 10:00:00",
+                                    "type": "text",
+                                    "description": "\u767c\u4f48\u6642\u9593"
+                                },
+                                {
+                                    "key": "finished_at",
+                                    "value": "2025-01-31 23:59:59",
+                                    "type": "text",
+                                    "description": "\u7d50\u675f\u6642\u9593"
+                                },
+                                {
+                                    "key": "img_file",
+                                    "src": [],
+                                    "type": "file"
+                                },
+                                {
+                                    "key": "_method",
+                                    "value": "PUT",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "description": "\u5716\u7247\u6211\u9078 file \u578b\u614b\u4e0a\u50b3\uff0c\u56e0\u70ba base64 \u6703\u589e\u52a0\u8cc7\u6599\u91cf",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"success\", \"message\": \"Post updated successfully\", \"data\": {...}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u522a\u9664\u6307\u5b9a\u6587\u7ae0\u8cc7\u6599\uff08\u8edf\u522a\u9664\uff09",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the post."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "\u56e0\u70ba\u6c92\u505a\u6b0a\u9650\u8a2d\u8a08\uff0c\u6240\u4ee5\u5148\u66ab\u6642\u5ffd\u7565",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"message\": \"\u6587\u7ae0\u5df2\u79fb\u81f3\u56de\u6536\u6876\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u641c\u5c0b\u6587\u7ae0\n\u8cc7\u6599\u91cf\u5927\u6642\uff0c\u53ef\u4ee5\u6539\u7528\u5168\u6587\u7d22\u5f15\u89e3\u6c7a\u65b9\u6848\uff0c\u5982 Elasticsearch \u6216 MySQL \u7684\u5168\u6587\u7d22\u5f15\u529f\u80fd",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/search",
+                            "query": [
+                                {
+                                    "key": "query",
+                                    "value": "%E7%AF%84%E4%BE%8B",
+                                    "description": "\u641c\u5c0b\u95dc\u9375\u5b57",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/posts\/search?query=%E7%AF%84%E4%BE%8B"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"success\", \"message\": \"Search results retrieved successfully\", \"data\": {...}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u986f\u793a\u6240\u6709\u555f\u7528\u4e2d\u7684\u6587\u7ae0",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/active-posts",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/active-posts"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":\"success\",\"message\":\"Posts retrieved successfully\",\"data\":{\"current_page\":1,\"data\":[{\"id\":3,\"title\":\"\\u7bc4\\u4f8b\\u6587\\u7ae0\\u6a19\\u984c\",\"img_path\":\"posts\\\/XKljpWmkHa1JROpr71YK9FE7cpdxp73dvOJ1n1fw.jpg\",\"content\":\"<p>\\u9019\\u662f\\u4e00\\u7bc7\\u7bc4\\u4f8b\\u6587\\u7ae0\\u7684\\u5167\\u5bb9\\u3002<\\\/p>\",\"sort_order\":300000,\"status\":1,\"is_pinned\":0,\"slug\":null,\"published_at\":\"2024-12-31 10:00:00\",\"finished_at\":\"2025-01-31 23:59:59\",\"created_at\":\"2026-01-09T23:55:22.000000Z\",\"updated_at\":\"2026-01-09T23:55:22.000000Z\",\"deleted_at\":null},{\"id\":2,\"title\":\"\\u7bc4\\u4f8b\\u6587\\u7ae0\\u6a19\\u984c\",\"img_path\":null,\"content\":\"<p>\\u9019\\u662f\\u4e00\\u7bc7\\u7bc4\\u4f8b\\u6587\\u7ae0\\u7684\\u5167\\u5bb9\\u3002<\\\/p>\",\"sort_order\":200000,\"status\":1,\"is_pinned\":0,\"slug\":null,\"published_at\":\"2024-12-31 10:00:00\",\"finished_at\":\"2025-01-31 23:59:59\",\"created_at\":\"2026-01-09T23:55:14.000000Z\",\"updated_at\":\"2026-01-09T23:55:14.000000Z\",\"deleted_at\":null},{\"id\":1,\"title\":\"\\u7bc4\\u4f8b\\u6587\\u7ae0\\u6a19\\u984c\",\"img_path\":\"posts\\\/4NFGSEcTSiQ6iUMuZ8RoyvEvR6PdqYsEOq7rzvBF.jpg\",\"content\":\"<p>\\u9019\\u662f\\u4e00\\u7bc7\\u7bc4\\u4f8b\\u6587\\u7ae0\\u7684\\u5167\\u5bb9\\u3002<\\\/p>\",\"sort_order\":100000,\"status\":1,\"is_pinned\":0,\"slug\":null,\"published_at\":\"2024-12-31 10:00:00\",\"finished_at\":\"2025-01-31 23:59:59\",\"created_at\":\"2026-01-09T23:49:41.000000Z\",\"updated_at\":\"2026-01-09T23:49:41.000000Z\",\"deleted_at\":null}],\"first_page_url\":\"http:\\\/\\\/localhost:8000\\\/api\\\/active-posts?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/localhost:8000\\\/api\\\/active-posts?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"page\":null,\"active\":false},{\"url\":\"http:\\\/\\\/localhost:8000\\\/api\\\/active-posts?page=1\",\"label\":\"1\",\"page\":1,\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"page\":null,\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/localhost:8000\\\/api\\\/active-posts\",\"per_page\":10,\"prev_page_url\":null,\"to\":3,\"total\":3}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u5448\u73fe\u8cc7\u6e90\u56de\u6536\u6876\u7684\u6587\u7ae0.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/trashed-posts",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/trashed-posts"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"success\", \"message\": \"Posts retrieved successfully\", \"data\": {...}}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
