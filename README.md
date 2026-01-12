@@ -13,7 +13,7 @@
 
     ```bash
     chmod +x init.sh
-    ./init.sh
+    sh ./init.sh
     ```
 
 2. **Windows 環境**
